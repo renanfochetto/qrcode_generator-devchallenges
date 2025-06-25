@@ -1,0 +1,144 @@
+@layer reset {
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    /* https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/ */
+    html {
+        -moz-text-size-adjust: none;
+        -webkit-text-size-adjust: none;
+        text-size-adjust: none;
+    }
+
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    figure,
+    blockquote,
+    dl,
+    dd {
+        margin: 0;
+    }
+
+    /* https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html */
+    [role="list"] {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        min-block-size: 100vh;
+        line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3,
+    button,
+    input,
+    label {
+        line-height: 1.1;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        text-wrap: balance;
+    }
+
+    p,
+    li {
+        text-wrap: pretty;
+    }
+
+    img,
+    picture {
+        max-inline-size: 100%;
+        display: block;
+    }
+
+    input,
+    button,
+    textarea,
+    select {
+        font: inherit;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@layer base {
+    :root {
+        --primary-white: #f2f5f9;
+        --secondary-white: #fafaf9;
+        --primary-black: #030616;
+        --primary-blue: #263fa9;
+        --primary-gray: #f8fafc1a;
+        font-family: "Outfit", sans-serif;
+        font-size: 16px;
+    }
+}
+
+@layer layout {
+    body {
+        width: 1280px;
+        margin: 0 auto;
+        background-image: url("./assets/qa-bg.jpg");
+        background-position: center;
+        background-size: cover;
+    }
+
+    section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    label {
+        position: relative;
+        display: block;
+        width: 616px;
+    }
+
+    input {
+        width: 100%;
+        border-radius: 1.2rem;
+        border: 2px solid var(--primary-blue);
+        background: var(--primary-black);
+        padding: 1.5rem;
+    }
+
+    input::placeholder {
+        color: var(--primary-white);
+        opacity: 1;
+    }
+
+    button {
+        background-color: var(--primary-blue);
+        border: none;
+        color: var(--primary-white);
+        border-radius: 0.8rem;
+        padding: 1.15rem 2.6rem;
+        position: absolute;
+        right: 9px;
+        top: 7px;
+        cursor: pointer;
+    }
+
+    .logo {
+        padding: 2rem;
+    }
+}

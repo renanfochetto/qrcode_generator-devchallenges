@@ -3,10 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preload" href="style.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preload" href="script.js" as="script">
+    <script src="script.js" preload defer></script>
     <title>QR Code Generator</title>
 </head>
 <body>
-
+    <section>
+        <div class="logo">
+            <img src="assets/Logo.svg" alt="Logo from QR Code Generator">
+        </div>
+        <label for="urlInput">
+            <input id="urlInput" type="text" placeholder="Enter an url">
+            <button id="generate">QR Code</button>
+        </label>
+    </section>
 </body>
 </html>
