@@ -15,14 +15,29 @@
     <title>QR Code Generator</title>
 </head>
 <body>
-    <section>
+    <section class="input-container ">
         <div class="logo">
             <img src="assets/Logo.svg" alt="Logo from QR Code Generator">
         </div>
         <label for="urlInput">
             <input id="urlInput" type="text" placeholder="Enter an url">
-            <button id="generate">QR Code</button>
+            <button id="generate" class="button-input">QR Code</button>
         </label>
     </section>
+    <section class="qrcode-container hidden">
+        <div class="logo">
+            <img src="assets/Logo.svg" alt="Logo from QR Code Generator">
+        </div>
+        <div class="qrcode-content">
+            <div class="qrcode-background">
+                <div id="qrcode" class="qr-code"></div>
+            </div>
+            <div class="buttons">
+                <button id="download" class="button-qrcode">Download <img src="assets/Load_circle_duotone.svg" alt="Download Icon"></button>
+                <button id="reset" class="button-qrcode">Share <img src="assets/link_alt.svg" alt="Share Icon"></button>
+            </div>
+        </div>
+    </section>
+    <div id="spinner" class="spinner hidden"></div>
 </body>
 </html>
