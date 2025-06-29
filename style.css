@@ -1,3 +1,5 @@
+@layer reset, base, layout, components, utilities;
+
 @layer reset {
     *,
     *::before,
@@ -23,13 +25,6 @@
     dl,
     dd {
         margin: 0;
-    }
-
-    /* https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html */
-    [role="list"] {
-        list-style: none;
-        margin: 0;
-        padding: 0;
     }
 
     body {
@@ -79,71 +74,102 @@
 
 @layer base {
     :root {
+
+        /*CUSTOM PROPERTIES*/
         --primary-white: #f2f5f9;
         --secondary-white: #fafaf9;
         --primary-black: #030616;
         --primary-blue: #263fa9;
         --secondary-blue: #5371f9;
         --primary-gray: #f8fafc1a;
+        --fly-success: #28a745;
+        --fly-warning: #ffc107;
+        --fly-error: #dc3545;
+        --transparent-white: rgba(255, 255, 255, 0.2);
+
         font-family: "Outfit", sans-serif;
+
         font-size: 16px;
+
+        /*BORDER RADIUS*/
+        --border-radius-sm: 0.4rem;
+        --border-radius-md: 0.8rem;
+        --border-radius-lg: 1rem;
+        --border-radius-xl: 1.2rem;
+        --border-radius-full: 100%;
     }
 }
 
 @layer layout {
     body {
-        width: 1280px;
+        max-width: 1280px;
+        width: 100%;
         height: 100vh;
         margin: 0 auto;
+        padding-inline: 1rem;
         background-image: url("./assets/qa-bg.jpg");
         background-position: center;
         background-size: cover;
     }
 
-    main {
-        display: flex;
+    section {
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .input-container {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .qrcode-container {
-        width: 100%;
-        height: 95vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .hidden{
-        display: none;
     }
 
     label {
         position: relative;
         display: block;
-        width: 616px;
+    }
+
+    .logo {
+        padding: 2rem;
+    }
+
+    .input-container {
+        display: flex;
     }
 
     .input-wrapper {
+        align-items: center;
+        justify-content: space-between;
         position: relative;
-        width: 100%;
         max-width: 616px;
     }
 
+    .button-input {
+        position: absolute;
+        right: 9px;
+    }
+
+    .qr-code {
+        background-color: var(--primary-white);
+        padding: 1.6rem;
+        border-radius: var(--border-radius-lg);
+    }
+
+    .qrcode-background {
+        background-color: var(--transparent-white);
+        width: 17.75rem;
+        height: 17.75rem;
+        border-radius: var(--border-radius-full);
+        margin: 2rem;
+    }
+
+    .buttons {
+        gap: 1.8rem;
+        margin-top: 2rem;
+    }
+
+    .button-qrcode {
+        gap: 0.8rem;
+    }
+}
+
+@layer components {
+
+    /*INPUT*/
     input {
-        width: 100%;
-        border-radius: 1.2rem;
+        border-radius: var(--border-radius-xl);
         border: 2px solid var(--primary-blue);
         background: var(--primary-black);
         color: var(--primary-white);
@@ -155,6 +181,7 @@
         opacity: 1;
     }
 
+    /*BUTTON*/
     button {
         background-color: var(--primary-blue);
         padding: 1rem 2.6rem;
@@ -170,15 +197,96 @@
     }
 
     button:active {
-        transform: scale(0.96);
+        transform: scale(0.9);
         filter: brightness(0.95);
-        transition: all 0.1s ease;
+        transition: all 0.2s ease-in-out;
     }
 
-    .button-input {
-        position: absolute;
-        right: 9px;
-        top: 7px;
+    /*FLY ALERT*/
+    .fly-alert {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        padding: 1rem;
+        border-radius: var(--border-radius-sm);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 1000;
+        color: var(--primary-white);
+    }
+
+    .fly-alert.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .fly-success {
+        background-color: var(--fly-success);
+    }
+
+    .fly-warning {
+        background-color: var(--fly-warning);
+        color: var(--primary-black);
+    }
+
+    .fly-error   {
+        background-color: var(--fly-error);
+    }
+
+    /*SPINNER*/
+    .spinner {
+        border: 4px solid var(--transparent-white);
+        border-top: 4px solid var(--primary-blue);
+        border-radius: var(--border-radius-full);
+        width: 3rem;
+        height: 3rem;
+        animation: spin 1s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+    }
+
+    /*SPINNER ANIMATION*/
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+}
+
+@layer utilities {
+
+    /*FLEX*/
+    .flex {
+        display: flex;
+    }
+
+    .flex-column {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /*ALIGNMENT*/
+    .align-center {
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*WIDTH & HEIGHT*/
+    .full-width {
+        width: 100%;
+    }
+
+    .full-height {
+        height: 100vh;
+    }
+
+    /*HIDDEN ELEMENTS*/
+    .hidden{
+        display: none;
     }
 
     .visually-hidden {
@@ -189,105 +297,5 @@
         position: absolute;
         white-space: nowrap;
         width: 1px;
-    }
-
-    .qrcode-content {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .qr-code {
-        background-color: var(--primary-white);
-        padding: 1.6rem;
-        border-radius: 1rem;
-    }
-
-    .qrcode-background {
-        background-color: rgba(255, 255, 255, 0.15);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 284px;
-        height: 284px;
-        border-radius: 100%;
-        margin: 2rem;
-    }
-
-    .buttons {
-        display: flex;
-        gap: 1.8rem;
-        margin-top: 2rem;
-    }
-
-    .button-qrcode {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        justify-content: center;
-    }
-
-    .logo {
-        padding: 2rem;
-    }
-
-    .qrcode-container {
-        display: none;
-    }
-
-    .spinner {
-        border: 4px solid rgba(255, 255, 255, 0.3);
-        border-top: 4px solid var(--primary-blue);
-        border-radius: 50%;
-        width: 48px;
-        height: 48px;
-        animation: spin 1s linear infinite;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 999;
-    }
-
-    @keyframes spin {
-        0% { transform: translate(-50%, -50%) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-}
-
-@layer fly-alert {
-    .fly-alert {
-        position: fixed;
-        top: 24px;
-        right: 24px;
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.3);
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        z-index: 1000;
-        font-size: 14px;
-        color: #fff;
-    }
-
-    .fly-alert.show {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .fly-success {
-        background-color: #28a745;
-    }
-
-    .fly-warning {
-        background-color: #ffc107; color: #000;
-    }
-
-    .fly-error   {
-        background-color: #dc3545;
     }
 }

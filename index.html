@@ -3,69 +3,87 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <!-- SEO Meta Tags -->
         <meta name="description" content="A simple QR Code Generator to create and download QR codes for URLs.">
+
         <!-- SCRIPT QR Code Generator -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
         <!-- Favicon and Styles -->
         <link rel="icon" href="favicon.ico" type="image/x-icon">
         <link rel="preload" href="style.css" as="style" onload="this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="style.css"></noscript>
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
         <!--Scripts-->
         <link rel="preload" href="script.js" as="script">
         <script src="script.js" preload defer></script>
+
         <!--Title-->
         <title>QR Code Generator</title>
     </head>
     <body>
-        <main>
+        <main class="flex-column align-center">
+
             <!-- Input Container -->
-            <section class="input-container ">
+            <section class="input-container align-center full-width full-height">
+
                 <!--Logo -->
                 <div class="logo">
-                    <img src="assets/Logo.svg" alt="Logo from QR Code Generator">
+                    <h1>
+                        <img src="assets/Logo.svg" alt="Logo from QR Code Generator">
+                    </h1>
                 </div>
+
                 <!-- Input Section -->
                 <label for="urlInput" class="visually-hidden">
                     Enter a URL to generate a QR Code
                 </label>
-                <div class="input-wrapper">
-                    <input id="urlInput" type="text" placeholder="Enter an url">
+                <div class="input-wrapper full-width flex">
+                    <input class="full-width" id="urlInput" type="text" placeholder="Enter an url">
                     <button id="generate" class="button-input">
                         QR Code
                     </button>
                 </div>
             </section>
+
             <!-- QR Code Section -->
-            <section class="qrcode-container hidden">
+            <section class="qrcode-container align-center hidden full-width full-height">
+
                 <!--Logo -->
                 <div class="logo">
-                    <img src="assets/Logo.svg" alt="Logo from QR Code Generator">
+                    <h1>
+                        <img src="assets/Logo.svg" alt="Logo from QR Code Generator">
+                    </h1>
                 </div>
+
                 <!-- QR Code Content -->
-                <div class="qrcode-content">
-                    <div class="qrcode-background">
+                <div class="qrcode-content flex-column align-center full-height">
+                    <div class="qrcode-background flex align-center">
                         <div id="qrcode" class="qr-code"></div>
                     </div>
+
                     <!-- Buttons -->
-                    <div class="buttons">
-                        <button id="download" class="button-qrcode">
+                    <div class="buttons flex">
+                        <button id="download" class="button-qrcode flex align-center">
                             Download
                             <img src="assets/Load_circle_duotone.svg" alt="Download QR Code">
                         </button>
-                        <button id="reset" class="button-qrcode">
+                        <button id="reset" class="button-qrcode flex align-center">
                             Share
                             <img src="assets/link_alt.svg" alt="Share QR Code">
                         </button>
                     </div>
                 </div>
             </section>
+
             <!-- Spinner -->
-            <div id="spinner" class="spinner  hidden"></div>
+            <div id="spinner" class="spinner hidden"></div>
         </main>
     </body>
 </html>
