@@ -1,43 +1,71 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="preload" href="style.css" as="style" onload="this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css"></noscript>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="preload" href="script.js" as="script">
-    <script src="script.js" preload defer></script>
-    <title>QR Code Generator</title>
-</head>
-<body>
-    <section class="input-container ">
-        <div class="logo">
-            <img src="assets/Logo.svg" alt="Logo from QR Code Generator">
-        </div>
-        <label for="urlInput">
-            <input id="urlInput" type="text" placeholder="Enter an url">
-            <button id="generate" class="button-input">QR Code</button>
-        </label>
-    </section>
-    <section class="qrcode-container hidden">
-        <div class="logo">
-            <img src="assets/Logo.svg" alt="Logo from QR Code Generator">
-        </div>
-        <div class="qrcode-content">
-            <div class="qrcode-background">
-                <div id="qrcode" class="qr-code"></div>
-            </div>
-            <div class="buttons">
-                <button id="download" class="button-qrcode">Download <img src="assets/Load_circle_duotone.svg" alt="Download Icon"></button>
-                <button id="reset" class="button-qrcode">Share <img src="assets/link_alt.svg" alt="Share Icon"></button>
-            </div>
-        </div>
-    </section>
-    <div id="spinner" class="spinner hidden"></div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="A simple QR Code Generator to create and download QR codes for URLs.">
+        <!-- SCRIPT QR Code Generator -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+        <!-- Favicon and Styles -->
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link rel="preload" href="style.css" as="style" onload="this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="style.css"></noscript>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+        <!--Scripts-->
+        <link rel="preload" href="script.js" as="script">
+        <script src="script.js" preload defer></script>
+        <!--Title-->
+        <title>QR Code Generator</title>
+    </head>
+    <body>
+        <main>
+            <!-- Input Container -->
+            <section class="input-container ">
+                <!--Logo -->
+                <div class="logo">
+                    <img src="assets/Logo.svg" alt="Logo from QR Code Generator">
+                </div>
+                <!-- Input Section -->
+                <label for="urlInput" class="visually-hidden">
+                    Enter a URL to generate a QR Code
+                </label>
+                <div class="input-wrapper">
+                    <input id="urlInput" type="text" placeholder="Enter an url">
+                    <button id="generate" class="button-input">
+                        QR Code
+                    </button>
+                </div>
+            </section>
+            <!-- QR Code Section -->
+            <section class="qrcode-container hidden">
+                <!--Logo -->
+                <div class="logo">
+                    <img src="assets/Logo.svg" alt="Logo from QR Code Generator">
+                </div>
+                <!-- QR Code Content -->
+                <div class="qrcode-content">
+                    <div class="qrcode-background">
+                        <div id="qrcode" class="qr-code"></div>
+                    </div>
+                    <!-- Buttons -->
+                    <div class="buttons">
+                        <button id="download" class="button-qrcode">
+                            Download
+                            <img src="assets/Load_circle_duotone.svg" alt="Download QR Code">
+                        </button>
+                        <button id="reset" class="button-qrcode">
+                            Share
+                            <img src="assets/link_alt.svg" alt="Share QR Code">
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- Spinner -->
+            <div id="spinner" class="spinner  hidden"></div>
+        </main>
+    </body>
 </html>

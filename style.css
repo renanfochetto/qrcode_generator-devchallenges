@@ -83,6 +83,7 @@
         --secondary-white: #fafaf9;
         --primary-black: #030616;
         --primary-blue: #263fa9;
+        --secondary-blue: #5371f9;
         --primary-gray: #f8fafc1a;
         font-family: "Outfit", sans-serif;
         font-size: 16px;
@@ -93,14 +94,17 @@
     body {
         width: 1280px;
         height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
         margin: 0 auto;
         background-image: url("./assets/qa-bg.jpg");
         background-position: center;
         background-size: cover;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .input-container {
@@ -131,13 +135,19 @@
         width: 616px;
     }
 
+    .input-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 616px;
+    }
+
     input {
         width: 100%;
         border-radius: 1.2rem;
         border: 2px solid var(--primary-blue);
         background: var(--primary-black);
         color: var(--primary-white);
-        padding: 1.5rem;
+        padding: 1.35rem;
     }
 
     input::placeholder {
@@ -145,20 +155,40 @@
         opacity: 1;
     }
 
-    .button-input {
+    button {
         background-color: var(--primary-blue);
+        padding: 1rem 2.6rem;
         border: none;
         color: var(--primary-white);
         border-radius: 0.8rem;
-        padding: 1.15rem 2.6rem;
-        position: absolute;
-        right: 8px;
-        top: 7px;
         cursor: pointer;
     }
 
-    .buttons {
-        display: flex;
+    button:hover {
+        background-color: var(--secondary-blue);
+        transition: all 0.2s ease-in-out;
+    }
+
+    button:active {
+        transform: scale(0.96);
+        filter: brightness(0.95);
+        transition: all 0.1s ease;
+    }
+
+    .button-input {
+        position: absolute;
+        right: 9px;
+        top: 7px;
+    }
+
+    .visually-hidden {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
     }
 
     .qrcode-content {
@@ -194,17 +224,10 @@
     }
 
     .button-qrcode {
-        background-color: var(--primary-blue);
         display: flex;
         align-items: center;
         gap: 0.8rem;
         justify-content: center;
-        border: none;
-        color: var(--primary-white);
-        border-radius: 0.8rem;
-        padding: 1.15rem 2.6rem;
-        z-index: 1;
-        cursor: pointer;
     }
 
     .logo {
@@ -233,5 +256,38 @@
         0% { transform: translate(-50%, -50%) rotate(0deg); }
         100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
+}
 
+@layer fly-alert {
+    .fly-alert {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 1000;
+        font-size: 14px;
+        color: #fff;
+    }
+
+    .fly-alert.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .fly-success {
+        background-color: #28a745;
+    }
+
+    .fly-warning {
+        background-color: #ffc107; color: #000;
+    }
+
+    .fly-error   {
+        background-color: #dc3545;
+    }
 }

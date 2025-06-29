@@ -36,7 +36,6 @@ const renderQRCode = (container, config) => {
   new QRCode(container, config);
 };
 
-const showAlert = (message) => window.alert(message);
 
 // 🚀 Composição funcional no clique
 document.getElementById("generate").addEventListener("click", async () => {
@@ -53,6 +52,81 @@ document.getElementById("generate").addEventListener("click", async () => {
 
     setSpinner(false);
   } else {
-    showAlert("Por favor, insira uma URL válida.");
+    showFlyAlert("Por favor, insira uma URL válida.", "warning");
   }
 });
+
+const getQRCodeImg = (container) => container.querySelector("img");
+
+const createDownloadLink = (src, filename = "qrcode.png") => {
+  const link = document.createElement("a");
+  link.href = src;
+  link.download = filename;
+  return link;
+}
+
+document.getElementById("download").addEventListener("click", () => {
+  const qrcodeContainer = document.getElementById("qrcode");
+  const imgElement = getQRCodeImg(qrcodeContainer);
+
+  if(imgElement) {
+    const link = createDownloadLink(imgElement.src);
+    link.click();
+  } else {
+    showFlyAlert("QR Code não encontrado.", "error");
+  }
+});
+
+const getQRCodeSrc = (container) => getQRCodeImg(container)?.src || "";
+
+const srcToBlob = async (src) => {
+  const response = await fetch(src);
+  return await response.blob();
+}
+
+const createClipboardItem = async (src) => {
+  const blob = await srcToBlob(src);
+  return new ClipboardItem({ [blob.type]: blob });
+}
+
+const copyQRCodeImageToClipboard = async (container) => {
+  const src = getQRCodeSrc(container);
+
+  if(!src) return false;
+
+  try {
+    const item = await createClipboardItem(src);
+    await navigator.clipboard.write([item]);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+document.getElementById("reset").addEventListener("click", async () => {
+  const qrcodeContainer = document.getElementById("qrcode");
+  const success = await copyQRCodeImageToClipboard(qrcodeContainer);
+
+  showFlyAlert(success
+    ? "Imagem do QR Code copiada para a área de transferência!"
+    : "Falha ao copiar a imagem do QR Code.",
+    success ? "success" : "error"
+  );
+});
+
+const showFlyAlert = (message, type = "success", duration = 3000) => {
+  const alert = document.createElement("div");
+  alert.className = `fly-alert fly-${type}`;
+  alert.textContent = message;
+
+  document.body.appendChild(alert);
+
+  requestAnimationFrame(() => {
+    alert.classList.add("show");
+    });
+
+  setTimeout(() => {
+    alert.classList.remove("show");
+    alert.addEventListener("transitionend", () => alert.remove());
+  }, duration);
+}
