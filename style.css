@@ -85,7 +85,7 @@
         --fly-success: #28a745;
         --fly-warning: #ffc107;
         --fly-error: #dc3545;
-        --transparent-white: rgba(255, 255, 255, 0.2);
+        --transparent-white: ;
 
         font-family: "Outfit", sans-serif;
 
@@ -148,7 +148,7 @@
     }
 
     .qrcode-background {
-        background-color: var(--transparent-white);
+        background-color: rgba(255, 255, 255, 0.15);
         width: 17.75rem;
         height: 17.75rem;
         border-radius: var(--border-radius-full);
@@ -156,12 +156,18 @@
     }
 
     .buttons {
-        gap: 1.8rem;
+        gap: 2rem;
         margin-top: 2rem;
     }
 
     .button-qrcode {
         gap: 0.8rem;
+    }
+
+    @media(width < 1025px) {
+        body {
+            max-width: 1024px;
+        }
     }
 }
 
@@ -236,7 +242,7 @@
 
     /*SPINNER*/
     .spinner {
-        border: 4px solid var(--transparent-white);
+        border: 4px solid rgba(255, 255, 255, 0.4);
         border-top: 4px solid var(--primary-blue);
         border-radius: var(--border-radius-full);
         width: 3rem;
@@ -255,6 +261,19 @@
         100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
+    @media(width < 1025px) {
+        .fly-alert {
+            padding: 0.8rem;
+            font-size: 12px;
+        }
+    }
+
+    @media(width < 641px) {
+        .fly-alert {
+            padding: 0.6rem;
+            font-size: 10px;
+        }
+    }
 }
 
 @layer utilities {
